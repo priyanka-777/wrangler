@@ -57,6 +57,8 @@ directive
     | text
     | number
     | bool
+    | byteSize           //  Added
+    | timeDuration       // Added
     | column
     | colList
     | numberList
@@ -166,6 +168,13 @@ number
 bool
  : Bool
  ;
+byteSize
+ : BYTE_SIZE
+ ;
+
+timeDuration
+ : TIME_DURATION
+ ;
 
 condition
  : OBrace (~CBrace | condition)* CBrace
@@ -194,7 +203,6 @@ stringList
 identifierList
  : Identifier (',' Identifier)*
  ;
-
 
 /*
  * Following are the Lexer Rules used for tokenizing the recipe.
@@ -311,3 +319,21 @@ fragment Int
 fragment Digit
  : [0-9]
  ;
+// Byte size unit tokens
+BYTE_SIZE
+    : [0-9]+ ('.' [0-9]+)? BYTE_UNIT
+    ;
+
+fragment BYTE_UNIT
+    : 'B' | 'KB' | 'MB' | 'GB' | 'TB'
+    ;
+
+// Time duration unit tokens
+TIME_DURATION
+    : [0-9]+ ('.' [0-9]+)? TIME_UNIT
+    ;
+
+fragment TIME_UNIT
+    : 'ns' | 'us' | 'ms' | 's' | 'm' | 'h'
+    ;
+

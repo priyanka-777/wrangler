@@ -21,6 +21,8 @@ import io.cdap.wrangler.api.RecipeSymbol;
 import io.cdap.wrangler.api.SourceInfo;
 import io.cdap.wrangler.api.Triplet;
 import io.cdap.wrangler.api.parser.Bool;
+import io.cdap.wrangler.api.parser.ByteSize;
+import io.cdap.wrangler.api.parser.TimeDuration;
 import io.cdap.wrangler.api.parser.BoolList;
 import io.cdap.wrangler.api.parser.ColumnName;
 import io.cdap.wrangler.api.parser.ColumnNameList;
@@ -228,6 +230,22 @@ public final class RecipeVisitor extends DirectivesBaseVisitor<RecipeSymbol.Buil
     builder.addToken(new Bool(Boolean.valueOf(ctx.Bool().getText())));
     return builder;
   }
+
+  @Override
+public RecipeSymbol.Builder visitByteSize(DirectivesParser.ByteSizeContext ctx) {
+    String value = ctx.getText(); // This gets the raw text, like "10MB"
+    builder.addToken(new ByteSize(value));
+    return builder;
+}
+
+@Override
+public RecipeSymbol.Builder visitTimeDuration(DirectivesParser.TimeDurationContext ctx) {
+    String value = ctx.getText(); // This gets the raw text, like "5s"
+    builder.addToken(new TimeDuration(value));
+    return builder;
+}
+
+
 
   /**
    * A Directive can include a expression or a condition to be evaluated. When
