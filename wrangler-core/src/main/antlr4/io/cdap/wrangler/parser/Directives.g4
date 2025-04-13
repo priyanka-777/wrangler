@@ -57,8 +57,6 @@ directive
     | text
     | number
     | bool
-    | byteSizeArg
-    | timeDurationArg
     | column
     | colList
     | numberList
@@ -142,7 +140,7 @@ numberRange
  ;
 
 value
- : String | Number | Column | Bool | BYTE_SIZE | TIME_DURATION
+ : String | Number | Column | Bool
  ;
 
 ecommand
@@ -167,13 +165,6 @@ number
 
 bool
  : Bool
- ;
-byteSizeArg
- : BYTE_SIZE
- ;
-
-timeDurationArg
- : TIME_DURATION
  ;
 
 condition
@@ -266,28 +257,6 @@ Number
  : Int ('.' Digit*)?
  ;
 
- BYTE_SIZE
- : Int BYTE_UNIT
- ;
-
-TIME_DURATION
- : Int TIME_UNIT
- ;
-
-fragment BYTE_UNIT
- : [kK][bB]
- | [mM][bB]
- | [gG][bB]
- | [tT][bB]
- ;
-
-fragment TIME_UNIT
- : [sS]
- | [mM][sS]
- | [hH]
- | [dD]
- ;
-
 Identifier
  : [a-zA-Z_\-] [a-zA-Z_0-9\-]*
  ;
@@ -333,7 +302,6 @@ Comment
 Space
  : [ \t\r\n\u000C]+ -> skip
  ;
-
 
 fragment Int
  : '-'? [1-9] Digit* [L]*

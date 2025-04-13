@@ -40,7 +40,6 @@ import java.io.Serializable;
  * @see Expression
  * @see Text
  * @see TextList
- * @see ByteSize
  */
 @PublicEvolving
 public enum TokenType implements Serializable {
@@ -85,10 +84,6 @@ public enum TokenType implements Serializable {
    *   ColumnName[,ColumnName]*
    * </code>
    */
-  BYTE_SIZE, // added
- TIME_DURATION,
-   LITERAL,
-
   COLUMN_NAME_LIST,
 
   /**
